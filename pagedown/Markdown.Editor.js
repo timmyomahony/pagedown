@@ -113,13 +113,13 @@
         idButton = "wmd-button-bar";
         idPreview = "wmd-preview";
         idInput = "wmd-input";
-        if(selectors){
-            if(selectors.hasOwnProperty('button'))
-                idButton = selectors['button'];
-            if(selectors.hasOwnProperty('preview'))
-                idPreview = selectors['preview'];
-            if(selectors.hasOwnProperty('input'))
-                idInput = selectors['input'];
+        if(options){
+            if(options.hasOwnProperty('button'))
+                idButton = options['button'];
+            if(options.hasOwnProperty('preview'))
+                idPreview = options['preview'];
+            if(options.hasOwnProperty('input'))
+                idInput = options['input'];
         }
 
         var hooks = this.hooks = new Markdown.HookCollection();
