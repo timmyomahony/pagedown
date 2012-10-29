@@ -1,3 +1,9 @@
+body 
+{ 
+	background-color: White;
+    font-family: sans-serif;
+}
+
 .wmd-panel
 {
 	margin-left: 25%;
@@ -80,6 +86,9 @@
 {
     left: 300px;
 }
+
+
+
 
 .wmd-prompt-background
 {
