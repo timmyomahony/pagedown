@@ -104,6 +104,24 @@
 
         idPostfix = idPostfix || "";
 
+        // 'selectors' is a literal mapping the pagedown elements to class/id names:
+        // {
+        //   'button' : 'wmd-button-bar',
+        //   'preview' : 'wmd-preview',
+        //   'input' : 'wmd-input',
+        // }
+        idButton = "wmd-button-bar";
+        idPreview = "wmd-preview";
+        idInput = "wmd-input";
+        if(selectors){
+            if(selectors.hasOwnProperty('button'))
+                idButton = selectors['button'];
+            if(selectors.hasOwnProperty('preview'))
+                idPreview = selectors['preview'];
+            if(selectors.hasOwnProperty('input'))
+                idInput = selectors['input'];
+        }
+
         var hooks = this.hooks = new Markdown.HookCollection();
         hooks.addNoop("onPreviewRefresh");       // called with no arguments after the preview has been refreshed
         hooks.addNoop("postBlockquoteCreation"); // called with the user's selection *after* the blockquote was created; should return the actual to-be-inserted text
@@ -121,7 +139,7 @@
             if (panels)
                 return; // already initialized
 
-            panels = new PanelCollection(idPostfix);
+            panels = new PanelCollection(idButton, idPreview, idInput, idPostfix);
             var commandManager = new CommandManager(hooks, getString);
             var previewManager = new PreviewManager(markdownConverter, panels, function () { hooks.onPreviewRefresh(); });
             var undoManager, uiManager;
@@ -297,11 +315,11 @@
     // This ONLY affects Internet Explorer (tested on versions 6, 7
     // and 8) and ONLY on button clicks.  Keyboard shortcuts work
     // normally since the focus never leaves the textarea.
-    function PanelCollection(postfix) {
-        this.buttonBar = doc.getElementById("wmd-button-bar" + postfix);
-        this.preview = doc.getElementById("wmd-preview" + postfix);
-        this.input = doc.getElementById("wmd-input" + postfix);
-    };
+    function PanelCollection(idButton, idPreview, idInput, postfix) {
+        this.buttonBar = doc.getElementById(idButton + postfix);
+        this.preview = doc.getElementById(idPreview + postfix);
+        this.input = doc.getElementById(idInput + postfix);
+    }
 
     // Returns true if the DOM element is visible, false if it's hidden.
     // Checks if display is anything other than none.
